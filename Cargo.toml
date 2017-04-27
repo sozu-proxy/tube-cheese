@@ -1,0 +1,20 @@
+[package]
+name = "tube-cheese"
+version = "0.1.0"
+authors = ["Geoffroy Couprie <geo.couprie@gmail.com>"]
+
+[dependencies]
+sozu-lib = { git = "https://github.com/sozu-proxy/sozu" }
+sozu-command-lib = { git = "https://github.com/sozu-proxy/sozu" }
+futures = "*"
+hyper = { git = "https://github.com/hyperium/hyper" }
+tokio-core = "*"
+tokio-timer = { git = "https://github.com/tokio-rs/tokio-timer" }
+pretty_env_logger = "*"
+serde = "^0.9"
+serde_json = "^0.9"
+serde_derive = "^0.9"
+url = "^1.4"
+mio     = "^0.6"
+mio-uds = "^0.6"
+clap = "^2.19.0"
