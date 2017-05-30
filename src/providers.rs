@@ -1,7 +1,6 @@
-use std::net;
 use std::collections::HashMap;
-use sozu_command::state::{HttpProxy,TlsProxy,ConfigState};
-use sozu_command::{CertFingerprint,CertificateAndKey,Order,HttpFront,TlsFront,Instance};
+use sozu_command::state::{ConfigState};
+use sozu_command::{Order,HttpFront,Instance};
 use url::Url;
 
 #[derive(Clone, Debug, Deserialize)]
@@ -53,7 +52,7 @@ impl Providers {
   pub fn to_http_state(&self, entry_point: &str, ip: &str, port: u16) -> ConfigState {
     //let mut proxy = HttpProxy::new(ip.to_string(), port);
     let mut proxy = ConfigState::new();
-    proxy.add_http_address(ip.to_string(), 80);
+    proxy.add_http_address(ip.to_string(), port);
 
     for provider in self.0.values() {
       for (app_id, frontend) in provider.frontends.iter() {

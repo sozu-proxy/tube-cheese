@@ -13,23 +13,11 @@ extern crate serde_json;
 extern crate sozu_lib as sozu;
 extern crate sozu_command_lib as sozu_command;
 
-use std::env;
-use std::io::{self, Write};
-use std::time::Duration;
+use clap::{App,Arg};
 
-use futures::Future;
-use futures::future;
-use futures::stream::{Fold,Stream};
-use mio_uds::UnixStream;
-use clap::{App,Arg,SubCommand};
-
-use sozu::channel::Channel;
 use sozu_command::config::Config;
-use sozu_command::state::HttpProxy;
-use sozu_command::data::{ConfigMessage,ConfigMessageAnswer};
 
 
-use hyper::Client;
 
 mod api;
 mod config;

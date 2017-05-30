@@ -1,23 +1,17 @@
-use std::io::{self, Write};
 use std::time::Duration;
 use std::sync::mpsc;
 
 use futures::Future;
 use futures::future;
-use futures::stream::{Fold,Stream};
-use mio_uds::UnixStream;
-use clap::{App,Arg,SubCommand};
+use futures::stream::Stream;
 use serde_json;
 use tokio_timer;
 use tokio_core;
 use hyper;
-use std::collections::HashMap;
 
 use sozu::channel::Channel;
 use sozu_command::Order;
-use sozu_command::config::Config;
 use sozu_command::state::ConfigState;
-use sozu_command::data::{ConfigMessage,ConfigMessageAnswer};
 
 
 use hyper::Client;
