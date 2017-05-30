@@ -62,7 +62,6 @@ pub fn driver(path: String) -> mpsc::Sender<Order> {
               let sending_msg = ConfigMessage::new(
                 format!("traefik-manager-{}", index),
                 ConfigCommand::ProxyConfiguration(msg),
-                Some("HTTP".to_string()),
                 None
               );
               println!("sending {:?}", sending_msg);
