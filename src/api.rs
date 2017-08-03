@@ -1,12 +1,9 @@
-use std::io::{self, Write};
 use std::time::Duration;
 use std::sync::mpsc;
 
 use futures::Future;
 use futures::future;
-use futures::stream::{Fold,Stream};
-use mio_uds::UnixStream;
-use clap::{App,Arg,SubCommand};
+use futures::stream::Stream;
 use serde_json;
 use tokio_timer;
 use tokio_core;
@@ -14,9 +11,7 @@ use hyper;
 
 use sozu::channel::Channel;
 use sozu_command::Order;
-use sozu_command::config::Config;
-use sozu_command::state::HttpProxy;
-use sozu_command::data::{ConfigMessage,ConfigMessageAnswer};
+use sozu_command::state::ConfigState;
 
 
 use hyper::Client;
@@ -30,7 +25,9 @@ pub fn driver(url: hyper::Url, tx: mpsc::Sender<Order>) {
     let client = Client::new(&handle);
     let d: Duration = Duration::from_millis(1000);
 
-    let state = HttpProxy::new("127.0.0.1".to_string(), 80);
+    let mut state = ConfigState::new();
+    state.add_http_address("127.0.0.1".to_string(), 80);
+
     let work = tokio_timer::Timer::default().interval(d).fold(state, move |state, ()| {
       let tx = tx.clone();
       let st = state.clone();

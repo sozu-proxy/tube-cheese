@@ -1,8 +1,7 @@
 use std::thread;
 use std::sync::mpsc;
-use std::time::{Duration, Instant};
+use std::time::Duration;
 use mio::*;
-use mio::tcp::{TcpListener, TcpStream};
 use mio_uds::UnixStream;
 use sozu::channel::Channel;
 use sozu_command::Order;
@@ -16,7 +15,7 @@ pub fn driver(path: String) -> mpsc::Sender<Order> {
   let (tx, rx) = mpsc::channel();
 
   thread::spawn(move || {
-    let mut poll = Poll::new().unwrap();
+    let poll = Poll::new().unwrap();
     poll.register(&channel.sock, Token(0), Ready::all(), PollOpt::edge());
 
     // Create storage for events
@@ -62,7 +61,6 @@ pub fn driver(path: String) -> mpsc::Sender<Order> {
               let sending_msg = ConfigMessage::new(
                 format!("traefik-manager-{}", index),
                 ConfigCommand::ProxyConfiguration(msg),
-                Some("HTTP".to_string()),
                 None
               );
               println!("sending {:?}", sending_msg);

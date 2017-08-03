@@ -1,7 +1,6 @@
-use std::net;
 use std::collections::HashMap;
-use sozu_command::state::{HttpProxy,TlsProxy};
-use sozu_command::{CertFingerprint,CertificateAndKey,Order,HttpFront,TlsFront,Instance};
+use sozu_command::state::{ConfigState};
+use sozu_command::{Order,HttpFront,Instance};
 use url::Url;
 
 #[derive(Clone, Debug, Deserialize)]
@@ -50,8 +49,10 @@ pub struct CircuitBreaker {
 
 
 impl Providers {
-  pub fn to_http_state(&self, entry_point: &str, ip: &str, port: u16) -> HttpProxy {
-    let mut proxy = HttpProxy::new(ip.to_string(), port);
+  pub fn to_http_state(&self, entry_point: &str, ip: &str, port: u16) -> ConfigState {
+    //let mut proxy = HttpProxy::new(ip.to_string(), port);
+    let mut proxy = ConfigState::new();
+    proxy.add_http_address(ip.to_string(), port);
 
     for provider in self.0.values() {
       for (app_id, frontend) in provider.frontends.iter() {
@@ -82,10 +83,10 @@ impl Providers {
     proxy
   }
 
+    /*
   pub fn to_tls_state(&self, entry_point: String, ip: String, port: u16) -> TlsProxy {
     let mut proxy = TlsProxy::new(ip, port);
 
-    /*
     for provider in self.0.values() {
       for (app_id, frontend) in provider.frontends.iter() {
         //FIXME: should check default entry points too
@@ -110,10 +111,11 @@ impl Providers {
           }
         }
       }
-    }*/
+    }
 
     proxy
   }
+  */
 }
 
 pub fn make_front(app_id: &str, routes: &HashMap<String, Route>) -> Option<HttpFront> {
