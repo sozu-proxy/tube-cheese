@@ -7,10 +7,10 @@ RUN apk add --no-cache --virtual .build-dependencies \
   g++ \
   gcc \
   musl-dev \
-  rust && \
+  rust
 RUN apk add --no-cache openssl-dev
-RUN cd /source
-RUN cargo build --release 
+WORKDIR /source
+RUN cargo build --release
 
 
 #CMD ["/bin/sozu", "--help"]
@@ -18,6 +18,5 @@ RUN cargo build --release
 
 FROM alpine:edge
 RUN apk add --no-cache openssl-dev
-WORKDIR /root/
-COPY --from=builder /source/target/release/sozu /bin/sozu
-CMD ["./app"]
+COPY --from=builder /source/target/release/tube-cheese /bin/tube-cheese
+CMD ["/bin/tube-cheese", "--help"]
