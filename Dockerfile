@@ -17,6 +17,6 @@ RUN cargo build --release
 
 
 FROM alpine:edge
-RUN apk add --no-cache openssl-dev && apk del
+RUN apk add --no-cache openssl
 COPY --from=builder /source/target/release/tube-cheese /bin/tube-cheese
 CMD ["/bin/tube-cheese", "--help"]
