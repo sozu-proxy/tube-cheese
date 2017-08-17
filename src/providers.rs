@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use sozu_command::state::{ConfigState};
-use sozu_command::{Order,HttpFront,Instance};
+use sozu_command::messages::{Order,HttpFront,Instance};
 use url::Url;
 
 #[derive(Clone, Debug, Deserialize)]

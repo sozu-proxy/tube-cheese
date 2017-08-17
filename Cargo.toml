@@ -4,7 +4,6 @@ version = "0.1.0"
 authors = ["Geoffroy Couprie <geo.couprie@gmail.com>"]
 
 [dependencies]
-sozu-lib = { git = "https://github.com/sozu-proxy/sozu" }
 sozu-command-lib = { git = "https://github.com/sozu-proxy/sozu" }
 futures = "^0.1"
 hyper = { git = "https://github.com/hyperium/hyper", rev = "34509ef51a600" }

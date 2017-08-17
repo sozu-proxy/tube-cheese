@@ -10,7 +10,6 @@ extern crate pretty_env_logger;
 extern crate url;
 extern crate serde;
 extern crate serde_json;
-extern crate sozu_lib as sozu;
 extern crate sozu_command_lib as sozu_command;
 
 use clap::{App,Arg};

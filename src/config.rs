@@ -3,8 +3,8 @@ use std::sync::mpsc;
 use std::time::Duration;
 use mio::*;
 use mio_uds::UnixStream;
-use sozu::channel::Channel;
-use sozu_command::Order;
+use sozu_command::channel::Channel;
+use sozu_command::messages::Order;
 use sozu_command::data::{ConfigCommand,ConfigMessage,ConfigMessageAnswer};
 
 pub fn driver(path: String) -> mpsc::Sender<Order> {

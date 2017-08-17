@@ -9,8 +9,8 @@ use tokio_timer;
 use tokio_core;
 use hyper;
 
-use sozu::channel::Channel;
-use sozu_command::Order;
+use sozu_command::channel::Channel;
+use sozu_command::messages::Order;
 use sozu_command::state::ConfigState;
 
 
