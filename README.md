@@ -19,7 +19,4 @@ There is already a working example to use sozu as a kubernetes ingress.
 
 ## testing
 
-1. install minikube and kubectl
-  - `minikube start`
-  - if "error: You must be logged in to the server (the server has asked for the client to provide credentials)" do `minikube stop` then restart
-2. `kubectl apply -f assets/k8s-ingress.yaml`
+Have a look at https://github.com/sozu-proxy/sozu-demo the demo project
